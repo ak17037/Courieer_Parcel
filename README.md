@@ -2,7 +2,7 @@
 
 **Course:** 25CSE0202 – Programming in Java
 **Institution:** Chitkara University
-**Evaluation:** CE-1 + Multithreading Module
+**Evaluation:** CE-1 
 
 ---
 
