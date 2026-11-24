@@ -1,159 +1,280 @@
 # Courier & Parcel Logistics Management System
-**Course:** 25CSE0202 – Programming in Java  
-**Student Name:** Vishavjeet Singh Chauhan  
-**Roll No:** 2510992871 | **Section:** G8  
-**Institution:** Chitkara University  
-**Evaluation:** Continuous Evaluation (CE-1 & Multithreading Modules)
+
+**Course:** 25CSE0202 – Programming in Java
+**Institution:** Chitkara University
+**Evaluation:** CE-1 + Multithreading Module
 
 ---
 
-## 📌 Project Overview
-A terminal-based **Courier & Parcel Logistics Management System** implemented in **Pure Core Java** (no database required, zero external dependencies). 
+## What is this project?
 
-All records are managed using in-memory Java **Collections Framework** structures (`HashMap`, `TreeMap`, `LinkedHashMap`, `ArrayList`) with sample data loaded on startup.
-The application includes a fully thread-safe core (`DataStore`) and a dedicated **Multithreading & Concurrency Lab** designed specifically to demonstrate every topic in the Java Multithreading syllabus.
+So basically we made a courier and parcel management system — the kind of thing companies like DTDC or Blue Dart use to track packages. Ours runs fully in the terminal, no database, no fancy frameworks. Everything is stored in Java collections in memory and the program comes with some pre-loaded sample data so you can start using it right away.
+
+The whole point was to cover every Java topic from our syllabus in one working project. Not just write classes for the sake of it — actually use them in a real workflow. A parcel gets booked, loaded onto a vehicle, dispatched, tracked, delivered. Each step touches different parts of the code.
 
 ---
 
-## 🚀 How to Compile and Run
+## How to run it
 
-### Option 1: Using the provided scripts
-- **To compile:**
-  Double-click `scripts\compile.bat` or run in terminal:
-  ```cmd
-  scripts\compile.bat
-  ```
-- **To run:**
-  Double-click `scripts\run.bat` or run in terminal:
-  ```cmd
-  scripts\run.bat
-  ```
-- **PowerShell:**
-  ```powershell
-  .\scripts\run.ps1
-  ```
+Make sure you have Java installed (JDK 11 or above works fine).
 
-### Option 2: Using standard `javac` and `java` directly
-From the project directory:
+**Easiest way — just double click:**
+```
+scripts\compile.bat    (compiles everything)
+scripts\run.bat        (runs the app)
+```
+
+**Or from terminal manually:**
 ```cmd
 javac -d out src\*.java
 java -cp out Main
 ```
 
----
-
-## 📂 Project Architecture & File Inventory (27 Files)
-
-All source files reside cleanly in `src/` under the default package for seamless compilation.
-
-### 1. Entity / Model Layer (8 Classes)
-| Class | Purpose | Concepts Demonstrated |
-|---|---|---|
-| `Customer.java` | Sender/receiver with multi-valued phone numbers | Encapsulation, constructors, `this`, `ArrayList<String>`, `toString()` |
-| `Facility.java` | Hub or Branch facility with regional categorization | OOP, encapsulation, String methods |
-| `Employee.java` | Staff member (Manager, Branch Staff, Delivery Agent, Driver) | OOP, wrapper class usage (`int` / `Integer`) |
-| `Vehicle.java` | Fleet vehicle with registration and payload capacity | Encapsulation, getters/setters, state tracking |
-| `Parcel.java` | Central parcel entity (dimensions, weight, status, promised date) | Complex OOP entity, volumetric weight derivation, `java.time` |
-| `Trip.java` | Inter-facility transit trips carrying multiple waybills | OOP, `ArrayList<String>` for loaded waybills, state lifecycle |
-| `Payment.java` | 1-to-1 payment tracking for parcels | String formatting, timestamps, status management |
-| `TrackingEvent.java` | Immutable audit log of parcel movement | **`Comparable<TrackingEvent>`** interface for timeline sorting |
-
-### 2. Core & Utility Layer (6 Classes)
-| Class | Purpose | Concepts Demonstrated |
-|---|---|---|
-| `Main.java` | Application entry point with banner, daemon startup & navigation | `static main`, String blocks, daemon thread initialization |
-| `DataStore.java` | Central in-memory data store with thread synchronization | **`HashMap`**, **`TreeMap`**, **`LinkedHashMap`**, **`ArrayList`**, **`synchronized` methods/blocks**, intrinsic locks, race condition demo |
-| `Menu.java` | Generic console menu renderer | `@FunctionalInterface Action`, lambda expressions, ArrayList |
-| `In.java` | Safe keyboard input helpers with validation | Robust `try-catch` exception handling, `Scanner`, `NumberFormatException` |
-| `TablePrinter.java` | Renders clean ASCII tables with column auto-sizing | `StringBuilder`, 2D string formatting, arrays |
-| `WaybillGenerator.java`| Generates verified waybill tracking numbers | Luhn mod-10 check digit algorithm, `String.format` |
-
-### 3. Menu & Interaction Layer (7 Classes)
-| Class | Purpose | Concepts Demonstrated |
-|---|---|---|
-| `CustomerMenu.java` | Customer onboarding, multi-phone management, history | HashMap lookup, search string filters |
-| `ParcelMenu.java` | Parcel booking with dynamic slab & volumetric pricing | Volumetric weight computation, validation |
-| `FacilityMenu.java` | Facility listing and employee staff assignments | TreeMap iteration, filtered sub-lists |
-| `FleetMenu.java` | Vehicle management, trip scheduling, parcel loading | Payload capacity checks, trip status transitions |
-| `TrackingMenu.java` | Real-time status lookup, check-ins, delivery updates | `Collections.sort()` on `Comparable` events |
-| `PaymentMenu.java` | Payment processing, receipt viewing, pending clearances | Iteration, status updates, invoice generation |
-| `ReportMenu.java` | Statistical summaries and business analytics | **`Comparator`** sorting, `TreeMap` revenue aggregation |
-
-### 4. Multithreading & Concurrency Layer (6 Classes)
-| Class | Purpose | Multithreading Syllabus Topics Demonstrated |
-|---|---|---|
-| `ThreadingMenu.java` | Interactive Concurrency Lab for teacher evaluation | Interactive menu hosting live simulations for all syllabus points |
-| `TransitSimulationThread.java` | Vehicle movement simulator extending `Thread` | **`Thread` subclass**, **`start()` vs `run()`**, **`sleep()`**, **`join()`**, **`interrupt()`**, execution tracing |
-| `BatchProcessingTask.java` | Bulk facility parcel auditor implementing `Runnable` | **`Runnable` interface**, **Sequential vs Concurrent benchmark**, Concurrency vs Parallelism |
-| `ThreadLifecycleDemo.java` | Live state inspector walking through all 6 states | **`NEW`**, **`RUNNABLE`**, **`TIMED_WAITING`**, **`WAITING`**, **`BLOCKED`**, **`TERMINATED`** (`Thread.State`) |
-| `ParcelDispatchQueue.java` | Bounded conveyor buffer for Hub dispatch | **`wait()`**, **`notifyAll()`**, **Guarded blocks** (`while` loops), Producer-Consumer coordination |
-| `TransitMonitorDaemon.java` | Background fleet health & heartbeat auditor | **`setDaemon(true)`**, **`Thread.MIN_PRIORITY`**, background execution tracing |
+**PowerShell users:**
+```powershell
+.\scripts\run.ps1
+```
 
 ---
 
-## 🎯 Direct Mapping to Full Syllabus Topics
+## Project structure
 
-### A. Core Java & Collections Topics
-| Syllabus Topic | How & Where It Is Implemented |
+```
+src/          all .java source files (27 files)
+out/          compiled .class files go here after compile.bat
+scripts/      compile.bat, run.bat, run.ps1
+```
+
+All source files are in the default package under `src/` — no subfolders needed, one `javac` command compiles everything.
+
+---
+
+## The files and what they do
+
+### Model classes (the data)
+
+| File | What it represents |
 |---|---|
-| **Classes & Objects, Constructors, `this`, `static`** | All model classes (`Customer`, `Parcel`, `Facility`, `Vehicle`, etc.) use parameterized constructors, encapsulation, and `this`. `DataStore` uses `static` storage and methods. |
-| **Interfaces & Polymorphism** | `TrackingEvent` implements `Comparable<TrackingEvent>`. `BatchProcessingTask` implements `Runnable`. `Menu` defines custom `@FunctionalInterface Action`. |
-| **Strings & Formatting** | `TablePrinter` dynamically constructs borders with `StringBuilder`. `WaybillGenerator` and `In` perform string transformations, slicing, and regex/character parsing. |
-| **Wrapper Classes** | `Integer` and `Double` used for parsing strings (`Integer.parseInt`, `Double.parseDouble`) and handling nullability. |
-| **Exception Handling (`try-catch`, `throw`, `throws`)** | `In.java` catches `NumberFormatException` and `DateTimeParseException`. All menu actions declare `throws Exception`, caught centrally in `Menu.java`. Interruption catches `InterruptedException`. |
-| **Collections Framework** | `ArrayList` (ordered lists), `HashMap` (O(1) lookups), `LinkedHashMap` (insertion order), `TreeMap` (natural sorting). |
-| **Sorting (`Comparable` & `Comparator`)** | `TrackingEvent` implements `Comparable<TrackingEvent>` (by timestamp). `ReportMenu` uses `Comparator` with lambdas. |
+| `Customer.java` | A person who sends or receives parcels. Stores name, address, and multiple phone numbers using `ArrayList<String>` |
+| `Parcel.java` | The actual package — dimensions, weight, status, waybill number, sender, receiver |
+| `Facility.java` | A Hub or Branch location. Hubs connect regions, Branches handle local pickups/deliveries |
+| `Employee.java` | Staff — Manager, Branch Staff, Delivery Agent, or Driver. Drivers need a valid license number |
+| `Vehicle.java` | Trucks or vans with a payload capacity in kg and a maintenance status |
+| `Trip.java` | One vehicle journey between two facilities, carrying a list of parcel waybill numbers |
+| `Payment.java` | Payment record for a parcel — mode (Cash, Card, UPI, Net Banking), amount, timestamp |
+| `TrackingEvent.java` | A single checkpoint in a parcel's journey. Implements `Comparable` so events sort by time automatically |
 
-### B. Multithreading Syllabus Topics (Weeks 9 - 16)
-| Syllabus Topic | Implementation in Project | Key Code References |
-|---|---|---|
-| **Multiprogramming vs Multithreading & Concurrency** | Documented & demonstrated in `ThreadingMenu.java` (Option 8 Viva Guide). Shows that threads share JVM heap/DataStore memory. | `ThreadingMenu::showTheoryGuide`, `DataStore.java` |
-| **Program, Process, and Thread** | Passive program (`.class`) vs active process (JVM) vs lightweight threads of execution. | `ThreadingMenu.java` |
-| **Sequential vs Concurrent Execution** | Live benchmark comparing sequential execution on main thread vs concurrent execution on 3 worker threads with speedup calculation. | `BatchProcessingTask.java`, `ThreadingMenu::demoBenchmark` |
-| **Concurrency vs Parallelism** | Interleaving on single core vs simultaneous execution across multi-core CPUs. | `BatchProcessingTask.java` |
-| **Thread Class & Runnable Interface** | `TransitSimulationThread` extends `Thread`. `BatchProcessingTask` implements `Runnable`. | `TransitSimulationThread.java`, `BatchProcessingTask.java` |
-| **`start()` vs `run()`** | Demonstrates that `run()` executes synchronously on caller thread, while `start()` spawns a new OS/JVM thread stack. | `TransitSimulationThread.java`, `ThreadingMenu::demoTransit` |
-| **`sleep()`, `join()`, `interrupt()`** | `sleep()` for travel milestones, `join()` for caller coordination, `interrupt()` with `InterruptedException` handling for emergency trip halts. | `TransitSimulationThread.java`, `ThreadingMenu::demoInterrupt` |
-| **Thread Lifecycle (6 States)** | Live trace capturing and printing `Thread.State` at every state: `NEW`, `RUNNABLE`, `TIMED_WAITING`, `WAITING`, `BLOCKED`, `TERMINATED`. | `ThreadLifecycleDemo.java`, `ThreadingMenu::demoLifecycle` |
-| **Daemon Threads & Priorities** | Background `TransitMonitorDaemon` initialized with `setDaemon(true)` and `setPriority(Thread.MIN_PRIORITY)`. JVM exits without blocking. | `TransitMonitorDaemon.java`, `Main.java` |
-| **Execution Tracing** | Formatted execution logs showing `[Thread: <name> \| ID: <id> \| Priority: <pri> \| State: <state>]`. | `TransitSimulationThread.java`, `ThreadingMenu.java` |
-| **Shared Data, Race Conditions & Critical Sections** | Side-by-side test comparing 2 concurrent threads incrementing an unsynchronized counter (lost updates, race condition) vs synchronized critical sections. | `DataStore.java`, `ThreadingMenu::demoRaceCondition` |
-| **Synchronized Methods & Blocks, Intrinsic Locks** | All mutation methods in `DataStore` use `synchronized` to acquire the intrinsic lock of `DataStore.class`, guaranteeing Atomicity and Visibility. | `DataStore.java` (`addParcel`, `addTrackingEvent`, etc.) |
-| **Inter-thread Communication: `wait()`, `notifyAll()`** | Bounded buffer conveyor (`ParcelDispatchQueue`). Producers wait when full; consumers wait when empty; notifyAll on state change. | `ParcelDispatchQueue.java`, `ThreadingMenu::demoProducerConsumer` |
-| **Guarded Blocks & Correct Monitor Usage** | Guard conditions wrapped inside `while (buffer.isFull()) wait()` to prevent spurious wakeups, inside synchronized monitor methods. | `ParcelDispatchQueue.java` |
+### Core / utility (the engine)
+
+| File | What it does |
+|---|---|
+| `Main.java` | Entry point. Prints the banner, starts the background daemon thread, opens the main menu |
+| `DataStore.java` | Stores everything in memory using `HashMap`, `TreeMap`, `LinkedHashMap`, `ArrayList`. All write methods are `synchronized` so threads don't corrupt data |
+| `Menu.java` | A reusable menu builder. Uses a `@FunctionalInterface` called `Action` so each menu option is just a lambda |
+| `In.java` | Handles all keyboard input safely. Wraps `Scanner` with `try-catch` so if you type letters where a number is expected, it asks again instead of crashing |
+| `TablePrinter.java` | Prints nice ASCII tables in the terminal with auto-sized columns using `StringBuilder` |
+| `WaybillGenerator.java` | Generates unique tracking numbers using the Luhn Mod-10 checksum algorithm (same one credit cards use) |
+
+### Menu screens (the interface)
+
+| File | What you can do there |
+|---|---|
+| `CustomerMenu.java` | Register customers, add phone numbers, search by name or phone, view parcel history |
+| `ParcelMenu.java` | Book a new parcel — enters dimensions, calculates volumetric weight, applies pricing slabs, fuel surcharge (15%), GST (18%) |
+| `FacilityMenu.java` | View all hubs and branches, see employees assigned to each location |
+| `FleetMenu.java` | Add vehicles, create trips, assign drivers, load parcels, dispatch and complete trips |
+| `TrackingMenu.java` | Look up any parcel's full movement history, mark check-ins, mark delivery |
+| `PaymentMenu.java` | Process payments, view receipts, see pending payments |
+| `ReportMenu.java` | Business reports — revenue by payment method, top customers by spend, parcel counts |
+| `ThreadingMenu.java` | The multithreading lab — interactive demos for every concurrency topic from the syllabus |
+
+### Multithreading classes (the concurrency lab)
+
+| File | What it demonstrates |
+|---|---|
+| `TransitSimulationThread.java` | A vehicle journey as a thread. Shows `Thread` subclassing, `start()` vs `run()`, `sleep()`, `join()`, `interrupt()` |
+| `ThreadLifecycleDemo.java` | Walks a thread through all 6 states live: NEW → RUNNABLE → TIMED_WAITING → WAITING → BLOCKED → TERMINATED |
+| `BatchProcessingTask.java` | Implements `Runnable`. Runs the same 3 tasks sequentially then concurrently and shows the time difference |
+| `ParcelDispatchQueue.java` | A bounded buffer (capacity 3). Two producer threads load parcels, one consumer thread dispatches them. Uses `wait()` and `notifyAll()` |
+| `TransitMonitorDaemon.java` | A background daemon thread that monitors fleet health. Set with `setDaemon(true)` and `Thread.MIN_PRIORITY` — JVM doesn't wait for it on exit |
 
 ---
 
-## 🧪 Suggested Demo Flow for Teacher Evaluation
+## Java syllabus topics and where they show up
 
-### Phase 1: Core Logistics Operations (Unchanged & Rock Solid)
-1. **Start System:** Run `scripts\run.bat` or `java -cp out Main`.
-2. **View Initial Data:** Go to `7. Reports & Queries` ➔ `6. Data summary (record counts)`.
-3. **Book a Parcel:** Go to `2. Parcels (Booking)` ➔ `1. Book a new parcel` (note volumetric calculation and generated waybill).
-4. **Track Movement:** Go to `5. Tracking & Delivery` ➔ `1. Track a parcel (full history)`.
-5. **Vehicle Dispatch:** Go to `4. Vehicles & Trips` ➔ `4. Load parcel onto trip`, then `5. Dispatch trip` and `6. Complete trip`.
+### Core OOP and language topics
 
-### Phase 2: Multithreading & Concurrency Evaluation (Menu Option 8)
-Go to `8. Multithreading & Concurrency Lab` in Main Menu:
+**Classes, Objects, Constructors, `this`**
+Every model class has a parameterized constructor and uses `this` to distinguish instance variables from parameters. Example — `Customer.java` has `this.name = name` throughout.
 
-1. **Thread, `start()`, `sleep()`, `join()` (Option 1):**
-   - Shows `TransitSimulationThread` subclassing `Thread`.
-   - Watch the live progress updates as the thread sleeps (`TIMED_WAITING`) between milestones and the main thread waits using `join()`.
-2. **Thread Interruption (Option 2):**
-   - Shows emergency halt signaling via `thread.interrupt()`.
-   - Explains how `InterruptedException` is cleanly caught and handled.
-3. **Thread Lifecycle (All 6 States) (Option 3):**
-   - Live real-time demonstration walking a thread through **`NEW`**, **`RUNNABLE`**, **`TIMED_WAITING`**, **`WAITING`**, **`BLOCKED`**, and **`TERMINATED`**.
-4. **Sequential vs Concurrent Benchmark (Option 4):**
-   - Runs 3 batch tasks sequentially, then concurrently on 3 worker threads.
-   - Shows execution time dropping by ~3x and explains Concurrency vs Parallelism.
-5. **Race Condition vs Synchronization (Option 5):**
-   - Shows two threads updating an unsynchronized counter -> lost updates occur!
-   - Shows the same operation with `synchronized` methods/blocks -> 100% exact result (20,000 / 20,000).
-6. **Producer-Consumer Coordination (Option 6):**
-   - Shows 2 Sorter threads (producers) and 1 Delivery Van thread (consumer) coordinating over a bounded conveyor buffer of capacity 3.
-   - Highlights `wait()`, `notifyAll()`, and guarded `while` loops.
-7. **Background Daemon Monitor (Option 7):**
-   - Displays live status of `TransitMonitorDaemon` running quietly in the background with `setDaemon(true)` and `MIN_PRIORITY`.
-8. **Viva & Theory Guide (Option 8):**
-   - Comprehensive quick reference with textbook answers to common viva questions.
+**Encapsulation**
+All fields in model classes are `private`. Access is only through getters and setters. `Customer`, `Parcel`, `Vehicle`, `Employee`, `Facility` all follow this.
+
+**Interfaces**
+- `TrackingEvent` implements `Comparable<TrackingEvent>` — `compareTo()` sorts by timestamp
+- `BatchProcessingTask` implements `Runnable` — task given to a thread
+- `Menu.java` defines its own `@FunctionalInterface Action` — used as a lambda target
+
+**Inheritance and Polymorphism**
+`TransitSimulationThread` extends `Thread`. Overrides `run()`. The `start()` call creates a new thread stack, calling `run()` directly doesn't.
+
+**`static` keyword**
+`DataStore` stores all collections as `static` so every class shares the same in-memory data without needing to pass objects around.
+
+**Wrapper Classes**
+`Integer.parseInt()`, `Double.parseDouble()` used in `In.java`. `NumberFormatException` caught when parsing fails.
+
+**Exception Handling**
+`In.java` catches `NumberFormatException` and `DateTimeParseException` in loops. `Menu.java` wraps every action in `try-catch` and prints the error without crashing the whole app.
+
+**String and StringBuilder**
+`TablePrinter.java` builds entire formatted tables using `StringBuilder` — appending borders, headers, and rows without creating intermediate String objects. `WaybillGenerator` uses `String.format` and character-level operations.
+
+**Collections Framework**
+
+| Collection | Used where | Why that one |
+|---|---|---|
+| `HashMap<String, Customer>` | Customer, Parcel, Vehicle lookups | O(1) average lookup by ID or waybill |
+| `TreeMap<String, Facility>` | Facility storage | Keeps facilities sorted by name automatically |
+| `LinkedHashMap` | Payment records | Preserves insertion order for receipts |
+| `ArrayList<String>` | Phone numbers, waybill lists in trips | Ordered, allows duplicates, easy to iterate |
+
+**Sorting — `Comparable` and `Comparator`**
+- `TrackingEvent` implements `Comparable<TrackingEvent>` — `Collections.sort()` just works on a list of events
+- `ReportMenu` uses `Comparator` via lambda `(a, b) -> Double.compare(b.getValue(), a.getValue())` to rank customers by spend
+
+**Functional Interface and Lambdas**
+`Menu.java` defines `@FunctionalInterface Action { void run() throws Exception; }`. Every menu option is registered as a lambda:
+```java
+menu.add("Book a parcel", () -> ParcelMenu.bookParcel());
+```
+
+---
+
+### Multithreading topics — full syllabus coverage
+
+**What is a Thread / Process / Program**
+A `.class` file sitting on disk is a passive program. When JVM loads it, that's a process. Inside that process, multiple threads run concurrently — sharing heap memory (DataStore) but with their own stack.
+
+**`Thread` class — subclassing**
+`TransitSimulationThread extends Thread`. Override `run()` with the actual work. Call `start()` to let JVM create a new thread stack and call `run()` on it.
+
+**`Runnable` interface**
+`BatchProcessingTask implements Runnable`. Pass to `new Thread(task)`. Preferred when your class already extends something else. Cleaner separation of task from thread.
+
+**`start()` vs `run()`**
+Calling `thread.run()` is just a regular method call — same thread, blocks everything. Calling `thread.start()` tells JVM to create a new OS-level thread and call `run()` there. Demo in `TransitSimulationThread.java` and `ThreadingMenu`.
+
+**`Thread.sleep(ms)`**
+Used in `TransitSimulationThread` to simulate travel time between facilities. Thread enters `TIMED_WAITING` state. Throws `InterruptedException` if interrupted while sleeping.
+
+**`join()`**
+Main thread calls `thread.join()` to wait for the simulation thread to finish before printing the final result. Without `join()`, the main thread would race ahead.
+
+**`interrupt()` and `InterruptedException`**
+`TransitSimulationThread` checks `Thread.currentThread().isInterrupted()` and handles `InterruptedException` in its `sleep()` calls — simulates an emergency halt mid-journey.
+
+**Thread Lifecycle — all 6 states**
+`ThreadLifecycleDemo.java` moves a thread through all states and prints `thread.getState()` at each point:
+
+```
+NEW → RUNNABLE → TIMED_WAITING → WAITING → BLOCKED → TERMINATED
+```
+
+| State | When |
+|---|---|
+| `NEW` | `new Thread(...)` called, `start()` not yet |
+| `RUNNABLE` | `start()` called, running or ready to run |
+| `TIMED_WAITING` | Inside `sleep(ms)` or `join(timeout)` |
+| `WAITING` | Inside `wait()` with no timeout |
+| `BLOCKED` | Waiting to acquire a `synchronized` lock another thread holds |
+| `TERMINATED` | `run()` method returned or threw uncaught exception |
+
+**Daemon Threads**
+`TransitMonitorDaemon` is started in `Main.java` with:
+```java
+daemon.setDaemon(true);
+daemon.setPriority(Thread.MIN_PRIORITY);
+daemon.start();
+```
+Daemon threads are background threads. JVM exits normally even if they're still running — it doesn't wait for them. If all non-daemon threads finish, daemon threads are killed automatically.
+
+**Race Conditions and Shared Data**
+Two threads incrementing the same counter without synchronization — some increments get lost (race condition). The demo in `ThreadingMenu` shows the counter ending up at something like 17,842 instead of 20,000. Then with `synchronized`, it always hits exactly 20,000.
+
+**Critical Sections and Intrinsic Locks**
+Every method in `DataStore` that modifies a collection is `synchronized`. The JVM gives each object an intrinsic lock — only one thread can hold it at a time. This protects the critical section.
+
+```java
+public synchronized void addParcel(Parcel p) {
+    parcels.put(p.getWaybill(), p);
+}
+```
+
+**`wait()`, `notifyAll()`, and Guarded Blocks**
+`ParcelDispatchQueue` is a bounded buffer with capacity 3. Two producer threads add parcels, one consumer takes them out.
+
+- When buffer is full → producer calls `wait()` → releases lock → goes to WAITING
+- When consumer takes one → calls `notifyAll()` → wakes producers
+- Guard condition is always a `while` loop, not `if` — protects against spurious wakeups:
+
+```java
+while (buffer.isFull()) wait();
+```
+
+**Sequential vs Concurrent Execution**
+`BatchProcessingTask` runs the same 3 audit jobs on one thread sequentially — takes ~3x the time. Then spawns 3 threads concurrently — roughly 3x faster because work overlaps. The benchmark prints both times.
+
+**Concurrency vs Parallelism**
+Concurrency = multiple tasks making progress, possibly interleaving on one core. Parallelism = multiple tasks running at literally the same instant on multiple CPU cores. Our threads are concurrent — the JVM/OS decides if they run in parallel depending on available cores.
+
+**Execution Tracing**
+Every threading demo prints structured logs like:
+```
+[Thread: Transit-Delhi | ID: 14 | Priority: 5 | State: TIMED_WAITING]
+```
+So you can see exactly which thread is doing what at each moment.
+
+---
+
+## Team division
+
+### Member 1 — Vishavjeet Singh Chauhan (Roll No: 2510992871)
+**Role:** System Architecture, Master Data & Shared Data Synchronization
+
+Owns: `Customer.java`, `CustomerMenu.java`, `Facility.java`, `FacilityMenu.java`, `Employee.java`, `TransitMonitorDaemon.java`
+
+Topics to know: OOP fundamentals, Constructors, Encapsulation, `@FunctionalInterface`, input validation with `try-catch`, `HashMap` for O(1) lookups, `TreeMap` for sorted facilities, Synchronization in `DataStore`, Race Conditions, Intrinsic Locks, Daemon Threads.
+
+---
+
+### Member 2
+**Role:** Logistics Operations, Fleet Management & Thread Lifecycle
+
+Owns: `Vehicle.java`, `Trip.java`, `FleetMenu.java`, `TrackingEvent.java`, `TrackingMenu.java`, `TransitSimulationThread.java`, `ThreadLifecycleDemo.java`
+
+Topics to know: `Comparable` and `compareTo()`, Wrapper classes, State lifecycle management, Thread subclassing, `start()` vs `run()`, `sleep()`, `join()`, `interrupt()`, `InterruptedException`, all 6 Thread states.
+
+---
+
+### Member 3
+**Role:** Commercial Pricing Engine, Concurrency Benchmarking & Inter-Thread Communication
+
+Owns: `WaybillGenerator.java`, `TablePrinter.java`, `ParcelMenu.java`, `Payment.java`, `PaymentMenu.java`, `ReportMenu.java`, `BatchProcessingTask.java`, `ParcelDispatchQueue.java`
+
+Topics to know: `Comparator` with lambdas, `StringBuilder`, Luhn Mod-10 algorithm, `Runnable` interface, Sequential vs Concurrent execution benchmark, Concurrency vs Parallelism, `wait()`, `notifyAll()`, Guarded Blocks, Producer-Consumer pattern.
+
+---
+
+## Shared union files — all three members must know these
+
+Every team member can be asked about these 6 files in the evaluation. They are the foundation of the whole project.
+
+| File | Why everyone must know it |
+|---|---|
+| `Main.java` | How the app starts, how daemon is booted, how the main menu is displayed |
+| `DataStore.java` | How data is stored in memory, why `synchronized` is on every write method, what collections are used and why |
+| `Menu.java` | How `@FunctionalInterface` and lambdas make the menu work, how exceptions are handled centrally |
+| `In.java` | How `try-catch` prevents crashes on bad input, what `NumberFormatException` is and when it's thrown |
+| `Parcel.java` | The central business entity — fields, constructor, volumetric weight, status transitions |
+| `ThreadingMenu.java` | The interactive concurrency lab — entry point for all multithreading demos |
